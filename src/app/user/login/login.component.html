@@ -1,0 +1,21 @@
+<mat-card class="container mt-3" style="max-width: 600px;">
+    <div class="row justify-content-md-center">
+        <div class="col-md-7 mt-3">
+            <form #form='ngForm' class="mb-4" autocomplete="off" (submit)="onSubmit(form)">
+                <div class="form-label-group mb-3">
+                    <label>Имя пользователя</label>
+                    <input class="form-control" #UserName="ngModel" name="Email" [(ngModel)]="formModel.Email" required>
+                </div>
+                <div class="form-label-group mb-3">
+                    <label>Пароль</label>
+                    <input type="password" class="form-control" #UserName="ngModel" name="Password" [(ngModel)]="formModel.Password" required>
+                </div>
+                <div class="form-label-row">
+                    <div class="form-group col-md-8 offset-md-2">
+                        <button type="submit" class="btn btn-success btn-block font-weight-bold" [disabled]="form.invalid">Вход</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</mat-card>

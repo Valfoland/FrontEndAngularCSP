@@ -1,0 +1,80 @@
+<div class="container">
+    <div class="row mt-3">
+        <div class="col col-sm-3">
+            <mat-form-field appearance="fill">
+                <mat-label>Вид</mat-label>
+                <mat-select>
+                    <mat-option (click)="setTypeAnalysis('table')" value="table">
+                        Таблица
+                    </mat-option>
+                    <mat-option (click)="setTypeAnalysis('linear')" value="linear">
+                        Линейный график
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="col col-sm-3">
+            <mat-form-field appearance="fill">
+                <mat-label>Выбор Ребенка</mat-label>
+                <mat-select>
+                    <mat-option *ngFor="let cd of service.childList" value="cd.nameChild" (click)="setChild(cd.id)">
+                        {{cd.nameChild}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div *ngIf="service.childResultList != null" class="col col-sm-3">
+            <mat-form-field appearance="fill" (click)="initSectionDropDown()">
+                <mat-label>Выбор Секции</mat-label>
+                <mat-select>
+                    <mat-option (click)="setSectionDropDown('All')" value="all">
+                        Все
+                    </mat-option>
+                    <mat-option *ngFor="let section of sectionTypeList" value="section" (click)="setSectionDropDown(section)">
+                        {{section}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div *ngIf="service.childResultList != null" class="col col-sm-3">
+            <mat-form-field appearance="fill" (click)="initMissionDropDown()">
+                <mat-label>Выбор Миссии</mat-label>
+                <mat-select>
+                    <mat-option (click)="setMissionDropDown('All')" value="all">
+                        Все
+                    </mat-option>
+                    <mat-option *ngFor="let mission of missionTypeList" value="mission" (click)="setMissionDropDown(mission)">
+                        {{mission}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+    </div>
+    <div *ngIf="typeData == 'table'">
+        <table class="table table-hover mt-3">
+            <thead class="thead-light">
+                <tr>
+                    <th>Секция</th>
+                    <th>Миссия</th>
+                    <th>Результат</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let pd of childResultList">
+                    <td>{{pd.typeSection}}</td>
+                    <td>{{pd.typeMission}}</td>
+                    <td>{{pd.percentResult}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div *ngIf="typeData == 'linear'">
+        <ngx-charts-line-chart class="row mt-5" [view]="[1000,400]" [results]="childGraphList" [xAxisLabel]="'Задания'"
+            [yAxisLabel]="'Результаты'" [legend]="false" [showXAxisLabel]="true"
+            [showYAxisLabel]="true" [xAxis]="true" [yAxis]="true" [gradient]="true">
+
+        </ngx-charts-line-chart>
+    </div>
+
+
+</div>

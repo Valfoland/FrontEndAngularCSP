@@ -1,0 +1,4 @@
+#main {
+    overflow:auto;
+    padding-bottom: 550px; /* this needs to be bigger than footer height*/
+}

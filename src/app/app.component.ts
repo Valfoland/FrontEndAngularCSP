@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,19 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'ClientApp';
+
+  constructor(private route: Router) {
+
+  }
+
+  isAuth(){
+    if(localStorage.getItem('token') != null){
+      return true;
+    }
+    return false;
+  }
+
+  onLogout(){
+    localStorage.removeItem('token');
+  }
 }

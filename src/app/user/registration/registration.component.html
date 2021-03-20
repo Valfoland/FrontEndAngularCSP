@@ -1,0 +1,77 @@
+<mat-card class="container mt-3" style="max-width: 600px;">
+  <div class="row justify-content-md-center">
+    <div class="col-md-7 mt-3">
+      <form [formGroup]="service.formModel" (submit)="onSubmit()">
+
+        <div class="form-group">
+          <label for="Email">Электронная почта:</label>
+          <input id="Email" formControlName="Email" type="Email" class="form-control"
+            [ngClass]="service.formModel.get('Email').touched && service.formModel.controls['Email'].invalid ? 'is-invalid' : ''">
+          <div *ngIf="service.formModel.get('Email').touched">
+            <label class="text-danger" *ngIf="service.formModel.controls['Email'].hasError('required')">
+              Введите эл.почту!
+            </label>
+            <label class="text-danger" *ngIf="service.formModel.controls['Email'].hasError('Email')">
+              Введите корректную почту!
+            </label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="Password">Пароль:</label>
+          <input id="Password" formControlName="Password" type="Password" class="form-control"
+            [ngClass]="service.formModel.get('Password').touched && service.formModel.controls['Password'].invalid ? 'is-invalid' : ''">
+          <div *ngIf="service.formModel.get('Password').touched">
+            <label class="col"
+              [ngClass]="service.formModel.controls['Password'].hasError('required') || service.formModel.controls['Password'].hasError('minlength')  ? 'text-danger' : 'text-success'">
+              <i class="material-icons">{{ service.formModel.controls['Password'].hasError('required') ||
+                service.formModel.controls['Password'].hasError('minlength') ? 'cancel' : 'check_circle' }}</i>
+              Пароль должен содержать не меньше 8 символов!
+            </label>
+            <label class="col"
+              [ngClass]="service.formModel.controls['Password'].hasError('required') || service.formModel.controls['Password'].hasError('hasNumber')  ? 'text-danger' : 'text-success'">
+              <i class="material-icons">{{ service.formModel.controls['Password'].hasError('required') ||
+                service.formModel.controls['Password'].hasError('hasNumber') ? 'cancel' : 'check_circle' }}</i>
+              Пароль должен содержать хотя бы 1 цифру!
+            </label>
+            <label class="col"
+              [ngClass]="service.formModel.controls['Password'].hasError('required') || service.formModel.controls['Password'].hasError('hasCapitalCase')  ? 'text-danger' : 'text-success'">
+              <i class="material-icons">{{ service.formModel.controls['Password'].hasError('required') ||
+                service.formModel.controls['Password'].hasError('hasCapitalCase') ? 'cancel' : 'check_circle' }}</i>
+              Пароль должен содержать хотя бы одну заглавную букву!
+            </label>
+            <label class="col"
+              [ngClass]="service.formModel.controls['Password'].hasError('required') || service.formModel.controls['Password'].hasError('hasSmallCase')  ? 'text-danger' : 'text-success'">
+              <i class="material-icons">{{ service.formModel.controls['Password'].hasError('required') ||
+                service.formModel.controls['Password'].hasError('hasSmallCase') ? 'cancel' : 'check_circle' }}</i>
+              Пароль должен содержать хотя бы одну строчную букву!
+            </label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="ConfirmPassword">Подтверждение пароля:</label>
+          <input id="ConfirmPassword" formControlName="ConfirmPassword" type="Password" class="form-control" [ngClass]="service.formModel.get('ConfirmPassword').touched && 
+            service.formModel.controls['ConfirmPassword'].invalid ? 'is-invalid' : ''">
+          <div *ngIf="service.formModel.get('ConfirmPassword').touched ">
+            <label class="text-danger" *ngIf="service.formModel.controls['ConfirmPassword'].hasError('required')">
+              Введите пароль!
+            </label>
+            <label class="text-danger"
+              *ngIf="service.formModel.controls['ConfirmPassword'].hasError('NoPassswordMatch')">
+              Пароли не совпадают!
+            </label>
+          </div>
+        </div>
+
+        <div class="form-group col-md-8 offset-md-2">
+          <button [disabled]="service.formModel.invalid" type="submit"
+            class="btn btn-success btn-block font-weight-bold">
+            Регистрация
+          </button>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</mat-card>
